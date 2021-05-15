@@ -21,6 +21,16 @@ class AuthorController {
         .catch(e => res.status(500).json(e));
     }
 
+    async all(req, res) {
+        
+        await AuthorModel.find()
+        .sort('name')
+        .then(response => {
+            return res.status(200).json(response);
+        })
+        .catch(e => res.status(500).json(e));
+    }
+
 }
 
 module.exports = new AuthorController();
