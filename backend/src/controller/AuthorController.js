@@ -43,6 +43,15 @@ class AuthorController {
         .catch(e => res.status(500).json(e));
     }
 
+    async delete(req, res) {
+        
+        await AuthorModel.deleteOne({'_id': req.params.id})
+        .then(response => {
+            return res.status(200).json(response);
+        })
+        .catch(e => res.status(500).json(e));
+    }
+
 }
 
 module.exports = new AuthorController();
