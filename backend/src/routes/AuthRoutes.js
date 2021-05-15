@@ -9,4 +9,6 @@ router.put('/:id', AuthorValidation, AuthorController.update);
 router.get('/filter/all', AuthorController.all);
 router.get('/:id', AuthorController.show);
 router.delete('/:id', AuthorController.delete);
+
+
 module.exports = router;
