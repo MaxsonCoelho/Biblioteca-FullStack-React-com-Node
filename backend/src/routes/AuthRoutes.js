@@ -5,6 +5,7 @@ const AuthorController = require('../controller/AuthorController');
 const AuthorValidation = require('../middlewares/AuthorValidation');
 
 router.post('/', AuthorValidation, AuthorController.create);
-router.put('/:id', AuthorController.update);
+router.put('/:id', AuthorValidation, AuthorController.update);
 router.get('/filter/all', AuthorController.all);
+router.get('/:id', AuthorController.show);
 module.exports = router;
