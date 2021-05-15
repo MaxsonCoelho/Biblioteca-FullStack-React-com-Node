@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 
 const AuthorSchema = new Schema({
-    name: {type: String, required: true},
-    age: {type: Number, required: true},
-    email: {type: String, required: true},
+    name: {type: String, require: true},
+    age: {type: Number, require: true},
+    email: {type: String, require: true},
 });
 
 module.exports = mongoose.model('Author', AuthorSchema);
