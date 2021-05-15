@@ -11,14 +11,27 @@ const BooksValidation = async (req, res, next) => {
     else if(!category)
     return res.status(400).json({ error: 'categoria é obrigatório' })
     else{
-        let exists = await BooksModel.findOne({
-            'title': {'$eq': title}
-        });
+        let exists;
+
+        if(req.params.id){
+            exists = await BooksModel.findOne({
+                '_id': {'$ne': req.params.id},
+                'title': {'$in': title}
+            });
+
+        }else {
+            exists = await BooksModel.findOne({
+                'title': {'$eq': title}
+            });
+        }
+        
         if(exists){
             return res.status(400).json({ error: 'este título já está cadastrado' })
         }
+        
+        next();
     }
-    next();
+    
 }
 
 module.exports = BooksValidation;
