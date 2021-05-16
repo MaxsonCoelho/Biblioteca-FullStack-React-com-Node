@@ -38,7 +38,7 @@ class BooksController {
             if(response)
             return res.status(200).json(response);
             else
-            return res.status(404).json({ error: 'Autor não encontrado' })
+            return res.status(404).json({ error: 'Título não encontrado' })
         })
         .catch(e => res.status(500).json(e));
     }
