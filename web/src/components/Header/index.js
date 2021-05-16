@@ -12,9 +12,11 @@ function Header() {
         
         <S.RightSide>
           <InputSearch txtPlaceholder={'Buscar por autores e titulos'}/>
-          <a href="#">Autores</a>
+          <a href="#">Início</a>
           <span className="dividir"/>
           <a href="#">Livros</a>
+          <span className="dividir"/>
+          <a href="#">Autores</a>
         </S.RightSide>
       </S.Container>
     );

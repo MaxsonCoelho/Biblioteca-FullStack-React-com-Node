@@ -11,14 +11,26 @@ const AuthorValidation = async (req, res, next) => {
     else if(!email)
     return res.status(400).json({ error: 'email é obrigatório' })
     else{
-        let exists = await AuthorModel.findOne({
-            'email': {'$eq': email}
-        });
+        let exists;
+
+        if(req.params.id){
+            exists = await AuthorModel.findOne({
+                '_id': {'$ne': req.params.id},
+                'email': {'$in': email}
+            });
+
+        }else {
+            exists = await AuthorModel.findOne({
+                'email': {'$eq': email}
+            });
+        }
+        
         if(exists){
             return res.status(400).json({ error: 'este email já está cadastrado' })
         }
+        
+        next();
     }
-    next();
 }
 
 module.exports = AuthorValidation;
