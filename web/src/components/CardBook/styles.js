@@ -13,10 +13,17 @@ export const Container = styled.div`
     margin: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: inline-block;
 
     img{
         width: 100%;
         height: 210px;
+        transform: scale(0.9);
+        transition: all ease 0.2s;
+
+        &:hover{
+            transform: scale(1);
+        }
     }
 
     &:hover{
@@ -31,6 +38,7 @@ export const TopCard = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    
 `
 
 

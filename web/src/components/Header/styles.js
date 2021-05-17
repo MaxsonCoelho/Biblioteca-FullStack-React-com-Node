@@ -6,7 +6,6 @@ export const Container = styled.div`
     height: 70px;
     background-color: #610B21;
     border-bottom: 5px solid #B43104;
-    outline: solid 6px #5F9EA0; 
 
     display: flex;
 `

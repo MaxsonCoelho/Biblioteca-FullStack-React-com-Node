@@ -2,7 +2,7 @@ const AuthorModel = require('../model/AuthorModel');
 
 const AuthorValidation = async (req, res, next) => {
 
-    const { name, age, email  } = req.body;
+    const { name, age, email, category  } = req.body;
 
     if(!name)
     return res.status(400).json({ error: 'nome é obrigatório '})
@@ -10,12 +10,14 @@ const AuthorValidation = async (req, res, next) => {
     return res.status(400).json({ error: 'idade é obrigatória' })
     else if(!email)
     return res.status(400).json({ error: 'email é obrigatório' })
+    else if(!category)
+    return res.status(400).json({ error: 'categoria é obrigatória' })
     else{
         let exists;
 
         if(req.params.id){
             exists = await AuthorModel.findOne({
-                '_id': {'$ne': req.params.id},
+                '_id': {'$in': req.params.id},
                 'email': {'$in': email}
             });
 

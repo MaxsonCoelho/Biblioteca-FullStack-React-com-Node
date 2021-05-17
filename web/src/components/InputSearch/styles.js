@@ -2,12 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     background-color:#E0EEEE;
-    border:solid 2px #5F9EA0;
     border-radius:10px;
     width:350px;
     height:32px;
     display: flex;
-    
+    border:none;
 
     input{
         float:left;

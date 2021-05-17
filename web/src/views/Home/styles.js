@@ -2,12 +2,58 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     width: 100%;
+    margin-bottom: 100px;
+
 `
 export const Content = styled.div`
-    width: 100%;
+    overflow-x: hidden;
+    padding-left: 30px;
+`
+
+export const RowList = styled.div`
+    transition: all ease 0.5;
+    display: inline-block;
+    
+`
+
+export const IconMovieRowLeft = styled.button`
+    border: none;
+    position: absolute;
+    width: 40px;
+    height: 350px;
+    background-color: transparent;
+    z-index: 99;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
+    left: 0;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all ease 0.5s;
+
+    &:hover{
+        opacity:1;
+    }
+`
+
+export const IconMovieRowRight = styled.button`
+    border: none;
+    position: absolute;
+    width: 40px;
+    height: 350px;
+    background-color: transparent;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 0;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all ease 0.5s;
+
+    &:hover{
+        opacity:1;
+    }
 `
 
 export const Title = styled.div`
@@ -24,4 +70,19 @@ export const Title = styled.div`
         background: #fff;
         padding: 0 20px;
     }
+`
+
+
+export const Loading = styled.div`
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 `
