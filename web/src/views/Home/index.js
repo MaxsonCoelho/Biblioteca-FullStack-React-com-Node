@@ -9,7 +9,17 @@ function Home() {
   return (
     <S.Container>
         <Header />
+        <S.Title>
+          <h3>Autores</h3>
+        </S.Title>
         <S.Content>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
           <Card />
         </S.Content>
         <Footer />
