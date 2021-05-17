@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from './styles';
 import logo from '../../assets/library.png';
 import InputSearch from '../InputSearch';
+import { Link } from 'react-router-dom';
 
 function Header() {
     return (
@@ -12,11 +13,11 @@ function Header() {
         
         <S.RightSide>
           <InputSearch txtPlaceholder={'Buscar por autores e titulos'}/>
-          <a href="#">Início</a>
+          <Link to="/">Início</Link>
           <span className="dividir"/>
-          <a href="#">Livros</a>
+          <Link to="/book">Livros</Link>
           <span className="dividir"/>
-          <a href="#">Autores</a>
+          <Link to="/author">Autores</Link>
         </S.RightSide>
       </S.Container>
     );

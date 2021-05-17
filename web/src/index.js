@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './views/Home';
-import Authors from './views/Authors'
+import Routes from './routes';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Authors />
+    <Routes />
   </React.StrictMode>,
   document.getElementById('root')
 );
