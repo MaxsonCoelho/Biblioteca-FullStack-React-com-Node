@@ -8,6 +8,11 @@ export const Container = styled.div`
 export const Content = styled.div`
     overflow-x: hidden;
     padding-left: 30px;
+
+    a{
+        text-decoration: none;
+        color: #000;
+    }
 `
 
 export const RowList = styled.div`

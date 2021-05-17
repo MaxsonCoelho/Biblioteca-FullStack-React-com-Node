@@ -7,6 +7,7 @@ import CardAuthor from '../../components/CardAuthor';
 // import CardBook from '../../components/CardBook';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { Link } from 'react-router-dom';
 
 
 function Home() {
@@ -88,9 +89,13 @@ function Home() {
           <S.RowList style={{
             marginLeft: scrollXAuthor, 
             width: author.length * 250}}>
-          {author.map(a => (
-            <CardAuthor name={a.name} age={a.age} category={a.category} />
-          ))}
+          {
+            author.map(a => (
+              <Link to={`/author/${a._id}`} >
+                <CardAuthor name={a.name} age={a.age} category={a.category} />
+              </Link>
+            ))
+          }
           </S.RowList>
         </S.Content>
         <S.Title>

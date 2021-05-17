@@ -15,7 +15,7 @@ const BooksValidation = async (req, res, next) => {
 
         if(req.params.id){
             exists = await BooksModel.findOne({
-                '_id': {'$ne': req.params.id},
+                '_id': {'$eq': req.params._id},
                 'title': {'$in': title}
             });
 

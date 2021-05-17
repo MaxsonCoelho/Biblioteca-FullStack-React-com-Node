@@ -4,10 +4,13 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CategoryIconsAuthor from '../../utils/categorysAuthor';
 import api from '../../services/api';
+import { Redirect } from 'react-router-dom';
+import { format } from 'date-fns';
 
 
-function Authors() {
+function Authors({match}) {
 
+    const [redirect, setRedirect] = useState(false);
     const [name, setName] = useState();
     const [date, setDate] =useState();
     const [email, setEmail] = useState();
@@ -15,20 +18,51 @@ function Authors() {
 
 
     async function save() {
-        await api.post(`/author`, {
-            name,
-            date: `${date}`,
-            email,
-            category
-        }).then(() =>
-            alert('Autor adicionado com sucesso!')
-        )
-        .catch(e => alert(`Falta escolher ou preencher alguma opção${e}`))
+        if(match.params.id){
+            await api.put(`/author/${match.params.id}`, {
+                name,
+                date: `${date}`,
+                email,
+                category
+            }).then(() => {
+                setRedirect(true)
+                alert('Autor atualizado com sucesso!')
+            })
+            .catch(e => alert(`Falta escolher ou preencher alguma opção${e}`))
+
+        }else {
+            await api.post(`/author`, {
+                name,
+                date: `${date}`,
+                email,
+                category
+            }).then(() => {
+                setRedirect(true)
+                alert('Autor adicionado com sucesso!')
+            })
+            .catch(e => alert(`Falta escolher ou preencher alguma opção${e}`))
+        }
     }
 
+    async function loadAuthorsDetails(){
+        await api.get(`/author/${match.params.id}`)
+        .then(response => {
+            console.log(response)
+            setName(response.data.name)
+            setDate(format(new Date(response.data.date), 'yyyy-MM-dd'))
+            setEmail(response.data.email)
+            setCategory(response.data.category)
+        })
+        .catch(e => console.log(e))
+    }
+
+    useEffect(() => {
+        loadAuthorsDetails();
+    },[])
 
   return (
     <S.Container>
+        { redirect && <Redirect to="/" /> }
         <Header />
 
         <S.Form>
@@ -38,7 +72,7 @@ function Authors() {
                         index > 0 &&
                         <button type="button" onClick={() => setCategory(index)}>
                             <img src={icon} alt="Categoria do autor" 
-                            className={category && category != index && 'inative'} />
+                            className={category && category !== index && 'inative'} />
                         </button>
                     ))
                 }

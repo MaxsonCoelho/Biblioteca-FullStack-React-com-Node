@@ -18,9 +18,9 @@ function Books() {
             title,
             description,
             category
-        }).then(() =>
+        }).then(() => {
             alert('Livro adicionado com sucesso!')
-        )
+        })
         .catch(e => alert(`Falta escolher ou preencher alguma opção${e}`))
     }
 

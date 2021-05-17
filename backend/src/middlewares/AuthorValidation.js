@@ -17,7 +17,7 @@ const AuthorValidation = async (req, res, next) => {
 
         if(req.params.id){
             exists = await AuthorModel.findOne({
-                '_id': {'$in': req.params.id},
+                '_id': {'$eq': req.params._id},
                 'email': {'$in': email}
             });
 
