@@ -36,7 +36,7 @@ function Books() {
                         index > 0 &&
                         <button type="button" onClick={() => setCategory(index)}>
                             <img src={icon} alt="Categoria do livro" 
-                            className={category && category != index && 'inative'} />
+                            className={category && category !== index && 'inative'} />
                         </button>
                     ))
                 }

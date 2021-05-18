@@ -26,7 +26,7 @@ export const IconMovieRowLeft = styled.button`
     position: absolute;
     width: 40px;
     height: 350px;
-    background-color: transparent;
+    background: none;
     z-index: 99;
     display: flex;
     align-items: center;
@@ -46,8 +46,8 @@ export const IconMovieRowRight = styled.button`
     position: absolute;
     width: 40px;
     height: 350px;
-    background-color: transparent;
-    z-index: 99;
+    background: none;
+    z-index: 29;
     display: flex;
     align-items: center;
     justify-content: center;

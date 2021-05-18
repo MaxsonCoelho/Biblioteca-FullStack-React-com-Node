@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 
 export const Container = styled.div`
-    width: 180px;
+    width: 200px;
     height: 330px;
     flex-direction: column;
-    box-shadow: 12px -10px 55px -21px rgba(0,0,0,0.75);
+    box-shadow: 12px -10px 55px -21px rgba(0,0,2,0.30);
     display: flex;
     border-radius: 10px;
     align-items: center;

@@ -13,18 +13,10 @@ import { Link } from 'react-router-dom';
 function Home() {
 
   const [author, setAuthor] = useState([]);
-  const [book, setBook] = useState([]);
+  // const [book, setBook] = useState([]);
   const [scrollXAuthor, setscrollXAuthor] = useState(0);
   // const [scrollXBook, setscrollXBook] = useState(0);
 
-
-  async function loadAuthors() {
-    await api.get('/author/filter/all')
-    .then(response => {
-      setAuthor(response.data.results)
-    })
-    
-  }
 
   // async function loadBooks() {
   //   await api.get('/books/filter/all')
@@ -41,13 +33,19 @@ function Home() {
     setscrollXAuthor(x);
   }
 
-  function handleRightArrowRightAuthor() {
+  async function handleRightArrowRightAuthor() {
+    
     let x = scrollXAuthor - Math.round(window.innerWidth / 2);
-    let listW = author.length * 150;
-    if((window.innerWidth - listW) > x) {
+      let listW = author.length * 240;
+      if((window.innerWidth - listW) > x) {
+        await api.get(`/author/filter/all/?page=1&limit=${author}`)
+      .then(response => {
+        setAuthor(response.data.results)
+      })
       x = (window.innerWidth - listW) - 60;
-    }
-    setscrollXAuthor(x);
+      }
+      setscrollXAuthor(x);  
+    
   }
 
   // function handleLeftArrowLeftBook() {
@@ -69,8 +67,15 @@ function Home() {
 
 
   useEffect(() => {
+
+    async function loadAuthors() {
+      await api.get('/author/filter/all')
+      .then(response => {
+        setAuthor(response.data.results)
+      })
+    }
     loadAuthors();
-  })
+  },[])
   
 
   return (
@@ -92,7 +97,7 @@ function Home() {
           {
             author.map(a => (
               <Link to={`/author/${a._id}`} >
-                <CardAuthor name={a.name} age={a.age} category={a.category} />
+                <CardAuthor name={a.name} email={a.email} category={a.category} />
               </Link>
             ))
           }

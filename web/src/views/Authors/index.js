@@ -17,7 +17,21 @@ function Authors({match}) {
     const [category, setCategory] =useState();
 
 
+    function attributeValidation(){
+        if(!name)
+            return alert("Por favor informe um nome")
+        else if(!date)
+            return alert("Por favor informe uma data de nascimento")
+        else if(!email)
+            return alert("Por favor informe um email válido")
+        else if(!category)
+            return alert("Por favor selecione uma categoria")
+    }
+
+
     async function save() {
+
+        attributeValidation()
         if(match.params.id){
             await api.put(`/author/${match.params.id}`, {
                 name,
@@ -28,7 +42,7 @@ function Authors({match}) {
                 setRedirect(true)
                 alert('Autor atualizado com sucesso!')
             })
-            .catch(e => alert(`Falta escolher ou preencher alguma opção${e}`))
+            .catch(e => console.log(e))
 
         }else {
             await api.post(`/author`, {
@@ -40,25 +54,34 @@ function Authors({match}) {
                 setRedirect(true)
                 alert('Autor adicionado com sucesso!')
             })
-            .catch(e => alert(`Falta escolher ou preencher alguma opção${e}`))
+            .catch(e => console.log(e))
         }
     }
 
-    async function loadAuthorsDetails(){
-        await api.get(`/author/${match.params.id}`)
-        .then(response => {
-            console.log(response)
-            setName(response.data.name)
-            setDate(format(new Date(response.data.date), 'yyyy-MM-dd'))
-            setEmail(response.data.email)
-            setCategory(response.data.category)
-        })
-        .catch(e => console.log(e))
+
+    async function remove() {
+        const res = window.confirm('Deseja realmente remover este autor?')
+        if(res === true){
+            await api.delete(`/author/${match.params.id}`)
+            .then(() => setRedirect(true));
+        }
     }
 
+
     useEffect(() => {
+        async function loadAuthorsDetails(){
+            await api.get(`/author/${match.params.id}`)
+            .then(response => {
+                setName(response.data.name)
+                setDate(format(new Date(response.data.date), 'yyyy-MM-dd'))
+                setEmail(response.data.email)
+                setCategory(response.data.category)
+            })
+            .catch(e => console.log(e))
+        }
         loadAuthorsDetails();
     },[])
+    
 
   return (
     <S.Container>
@@ -93,7 +116,8 @@ function Authors({match}) {
                 onChange={e => setDate(e.target.value)} value={date}/>
             </S.Input>
             <S.Delete>
-                <button type="button" alt="deletar autor">Excluir Autor</button>
+                { match.params.id && <button type="button" onClick={remove} 
+                alt="deletar autor">Excluir Autor</button> }
             </S.Delete>
             <S.Save>
                 <button type="button" onClick={save} >Salvar</button>
