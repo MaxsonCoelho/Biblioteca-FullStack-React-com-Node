@@ -1,5 +1,5 @@
 # biblioteca
- Backen (Node.js) and frontend (React.js). Creation of a Library where authors and their books will be registered.
+ Backend (Node.js) and frontend (React.js). Creation of a Library where authors and their books will be registered.
  
  Project FullStack 
  
@@ -22,4 +22,5 @@ Search.
 
 start projects with, npm install, both on the backend and on the frontend.
 
-NOTE: I couldn't get more time to upload images on the backend.
+NOTE: I couldn't get more time to upload images on the backend, 
+i also didn’t get more time to dockerize the project.
