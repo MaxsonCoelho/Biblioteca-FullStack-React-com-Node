@@ -16,6 +16,7 @@ function Home() {
   const [book, setBook] = useState([]);
   const [scrollXAuthor, setscrollXAuthor] = useState(0);
   const [scrollXBook, setscrollXBook] = useState(0);
+  const [search, setSearch] = useState();
 
 
   function handleLeftArrowLeftAuthor() {
@@ -36,7 +37,7 @@ function Home() {
     .then(response => {
       setAuthor(response.data.results)
     })
-    x = (window.innerWidth - listW) - 60;
+      x = (window.innerWidth - listW) - 60;
     }
     setscrollXAuthor(x);  
     
@@ -60,44 +61,77 @@ function Home() {
     .then(response => {
       setBook(response.data.results)
     })
-    x = (window.innerWidth - listW) - 60;
+      x = (window.innerWidth - listW) - 60;
     }
     setscrollXBook(x);  
   }
 
 
-  useEffect(() => {
-
-    async function loadAuthors() {
-      await api.get('/author/filter/all')
-      .then(response => {
-        setAuthor(response.data.results)
-      })
+  async function searchAuthor() {
+    if(!search) {
+      loadAuthors();
+      loadBooks();
+    }else {
+        await api.get(`/author/search?term=${search}&page=1&limit=10`)
+        .then(response => {
+          setAuthor(response.data.results)
+          searchBook();
+        })
     }
-    loadAuthors();
-  },[])
 
-  useEffect(() => {
+  }
 
-    async function loadBooks() {
-      await api.get('/books/filter/all')
+
+  async function searchBook() {
+      await api.get(`/books/search?term=${search}&page=1&limit=10`)
       .then(response => {
         setBook(response.data.results)
+        
       })
-    }
+    
+  }
+
+  async function loadAuthors() {
+    await api.get('/author/filter/all')
+    .then(response => {
+      setAuthor(response.data.results)
+    })
+  }
+
+  useEffect(() => {
+
+    
+    loadAuthors();
+  },[])
+  async function loadBooks() {
+    await api.get('/books/filter/all')
+    .then(response => {
+      setBook(response.data.results)
+    })
+  }
+
+  useEffect(() => {
+
+    
     loadBooks();
   },[])
   
 
   return (
     <S.Container>
-        <Header setAuthor={setAuthor} setBook={setBook} />
+        <Header />
+        <S.AreaInput>
+          <input onChange={e => setSearch(e.target.value)}  
+          value={search} type="text" placeholder="busca por título ou autor" />
+          <button type="button" onClick={searchAuthor}>Buscar</button>
+        </S.AreaInput>
         <S.Title>
           <h3>Autores</h3>
         </S.Title>
           {author.length <= 0 && (
             <S.Loading>
               <img src="https://i.gifer.com/ZZ5H.gif" alt="loading" />
+              <h2>Não existem registros</h2>
             </S.Loading>
           )
           }
@@ -126,6 +160,7 @@ function Home() {
           {book.length <= 0 && (
             <S.Loading>
               <img src="https://i.gifer.com/ZZ5H.gif" alt="loading" />
+              <h2>Não existem registros</h2>
             </S.Loading>
           )
           }

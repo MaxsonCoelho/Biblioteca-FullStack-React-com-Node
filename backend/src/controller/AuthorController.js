@@ -71,8 +71,7 @@ class AuthorController {
 
         const counter = await AuthorModel.find().count()
 
-        AuthorModel.find({ 'name': new RegExp('.*' + term + '*.', 'i')}, 
-        { 'category': new RegExp('.*' + term + '*.', 'i')})
+        AuthorModel.find({ 'name': new RegExp('.*' + term + '*.', 'i')})
         .skip((page - 1) * perPage) 
         .limit(perPage)
         .then(response => {
@@ -80,6 +79,7 @@ class AuthorController {
                 count: counter,
                 results: response
             }
+            console.log(response)
             res.status(200).json(results)
         })
         .catch(e => res.status(500).json(e))

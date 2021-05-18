@@ -48,37 +48,3 @@ export const RightSide = styled.div`
         }
     }
 `
-
-export const AreaInput = styled.div`
-    background-color: #E0EEEE;
-    border-radius: 10px;
-    width: 350px;
-    height: 32px;
-    display: flex;
-    border: none;
-    margin-top: 20px;
-
-    input{
-        float: left;
-        background: none;
-        padding-left: 5px;
-        font-size: 18px;
-        border: none;
-        height: 32px;
-        width: 77%;
-        display: flex;
-    }
-
-    button{
-        border:none;
-        float:right;
-        height:32px;
-        border-radius:0 7px 7px 0;
-        width:30%;
-        font-weight:bold;
-        background:#5F9EA0;
-        cursor: pointer
-      }
-      
-}
-`
