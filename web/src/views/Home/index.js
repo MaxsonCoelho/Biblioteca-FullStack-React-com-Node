@@ -91,10 +91,16 @@ function Home() {
 
   return (
     <S.Container>
-        <Header />
+        <Header setAuthor={setAuthor} setBook={setBook} />
         <S.Title>
           <h3>Autores</h3>
         </S.Title>
+          {author.length <= 0 && (
+            <S.Loading>
+              <img src="https://i.gifer.com/ZZ5H.gif" alt="loading" />
+            </S.Loading>
+          )
+          }
         <S.IconMovieRowLeft onClick={handleLeftArrowLeftAuthor}>
           <NavigateBeforeIcon style={{fontSize: 50}} />
         </S.IconMovieRowLeft>
@@ -117,6 +123,12 @@ function Home() {
         <S.Title>
           <h3>Livros</h3>
         </S.Title>
+          {book.length <= 0 && (
+            <S.Loading>
+              <img src="https://i.gifer.com/ZZ5H.gif" alt="loading" />
+            </S.Loading>
+          )
+          }
         <S.IconMovieRowLeft onClick={handleLeftArrowLeftBook}>
           <NavigateBeforeIcon style={{fontSize: 50}} />
         </S.IconMovieRowLeft>
@@ -135,11 +147,7 @@ function Home() {
           </S.RowList>
         </S.Content>
         <Footer />
-        {author.length <= 0 && (
-          <S.Loading>
-            <img src="https://i.gifer.com/ZZ5H.gif" alt="loading" />
-          </S.Loading>
-        )}
+        
     </S.Container>
   );
 }

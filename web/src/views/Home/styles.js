@@ -79,15 +79,15 @@ export const Title = styled.div`
 
 
 export const Loading = styled.div`
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99;
-    background-color: transparent;
+
+    background-color: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
+    img{
+        width: 30px;
+        height: 30px;
+    }
 `
+
