@@ -26,6 +26,7 @@ function Home() {
     setscrollXAuthor(x);
   }
 
+
   async function handleRightArrowRightAuthor() {
     
     let x = scrollXAuthor - Math.round(window.innerWidth / 2);
@@ -41,6 +42,7 @@ function Home() {
     
   }
 
+
   function handleLeftArrowLeftBook() {
     let x = scrollXBook + Math.round(window.innerWidth / 2);
     if(x > 0) {
@@ -48,6 +50,7 @@ function Home() {
     }
     setscrollXBook(x);
   }
+  
 
   async function handleRightArrowRightBook() {
     let x = scrollXBook - Math.round(window.innerWidth / 2);

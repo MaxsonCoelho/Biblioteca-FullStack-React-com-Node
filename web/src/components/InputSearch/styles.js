@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const AreaInput = styled.div`
     background-color:#E0EEEE;
     border-radius:10px;
     width:350px;

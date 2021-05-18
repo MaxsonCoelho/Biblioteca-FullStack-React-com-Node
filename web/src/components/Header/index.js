@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './styles';
 import logo from '../../assets/library.png';
-import InputSearch from '../InputSearch';
 import { Link } from 'react-router-dom';
 
 function Header() {
-    return (
+
+  const [search, setSearch] = useState();
+
+  return (
       <S.Container>
         <S.LeftSide>
           <img src={logo} alt="logo" />
         </S.LeftSide>
         
         <S.RightSide>
-          <InputSearch txtPlaceholder={'Buscar por autores e titulos'}/>
+          <S.Container>
+            <S.AreaInput>
+              <input onChange={e => setSearch(e.target.value)}  
+              value={search} type="text" placeholder="busca por título ou autor" />
+              <button>Buscar</button>
+            </S.AreaInput>
+          </S.Container>
           <Link to="/">Início</Link>
           <span className="dividir"/>
           <Link to="/book">Livros</Link>
