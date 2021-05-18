@@ -4,7 +4,7 @@ import api from '../../services/api';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CardAuthor from '../../components/CardAuthor';
-// import CardBook from '../../components/CardBook';
+import CardBook from '../../components/CardBook';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { Link } from 'react-router-dom';
@@ -13,17 +13,10 @@ import { Link } from 'react-router-dom';
 function Home() {
 
   const [author, setAuthor] = useState([]);
-  // const [book, setBook] = useState([]);
+  const [book, setBook] = useState([]);
   const [scrollXAuthor, setscrollXAuthor] = useState(0);
-  // const [scrollXBook, setscrollXBook] = useState(0);
+  const [scrollXBook, setscrollXBook] = useState(0);
 
-
-  // async function loadBooks() {
-  //   await api.get('/books/filter/all')
-  //   .then(response => {
-  //     setBook(response.data.results)
-  //   })
-  // }
 
   function handleLeftArrowLeftAuthor() {
     let x = scrollXAuthor + Math.round(window.innerWidth / 2);
@@ -36,34 +29,38 @@ function Home() {
   async function handleRightArrowRightAuthor() {
     
     let x = scrollXAuthor - Math.round(window.innerWidth / 2);
-      let listW = author.length * 240;
-      if((window.innerWidth - listW) > x) {
-        await api.get(`/author/filter/all/?page=1&limit=${author}`)
-      .then(response => {
-        setAuthor(response.data.results)
-      })
-      x = (window.innerWidth - listW) - 60;
-      }
-      setscrollXAuthor(x);  
+    let listW = author.length * 240;
+    if((window.innerWidth - listW) > x) {
+      await api.get(`/author/filter/all/?page=1&limit=${author}`)
+    .then(response => {
+      setAuthor(response.data.results)
+    })
+    x = (window.innerWidth - listW) - 60;
+    }
+    setscrollXAuthor(x);  
     
   }
 
-  // function handleLeftArrowLeftBook() {
-  //   let x = scrollXBook + Math.round(window.innerWidth / 2);
-  //   if(x > 0) {
-  //     x = 0;
-  //   }
-  //   setscrollXBook(x);
-  // }
+  function handleLeftArrowLeftBook() {
+    let x = scrollXBook + Math.round(window.innerWidth / 2);
+    if(x > 0) {
+      x = 0;
+    }
+    setscrollXBook(x);
+  }
 
-  // function handleRightArrowRightBook() {
-  //   let x = scrollXBook - Math.round(window.innerWidth / 2);
-  //   let listW = book.length * 150;
-  //   if((window.innerWidth - listW) > x) {
-  //     x = (window.innerWidth - listW) - 60;
-  //   }
-  //   setscrollXBook(x);
-  // }
+  async function handleRightArrowRightBook() {
+    let x = scrollXBook - Math.round(window.innerWidth / 2);
+    let listW = book.length * 240;
+    if((window.innerWidth - listW) > x) {
+      await api.get(`/books/filter/all/?page=1&limit=${book}`)
+    .then(response => {
+      setBook(response.data.results)
+    })
+    x = (window.innerWidth - listW) - 60;
+    }
+    setscrollXBook(x);  
+  }
 
 
   useEffect(() => {
@@ -75,6 +72,17 @@ function Home() {
       })
     }
     loadAuthors();
+  },[])
+
+  useEffect(() => {
+
+    async function loadBooks() {
+      await api.get('/books/filter/all')
+      .then(response => {
+        setBook(response.data.results)
+      })
+    }
+    loadBooks();
   },[])
   
 
@@ -106,7 +114,7 @@ function Home() {
         <S.Title>
           <h3>Livros</h3>
         </S.Title>
-        {/* <S.IconMovieRowLeft onClick={handleLeftArrowLeftBook}>
+        <S.IconMovieRowLeft onClick={handleLeftArrowLeftBook}>
           <NavigateBeforeIcon style={{fontSize: 50}} />
         </S.IconMovieRowLeft>
         <S.IconMovieRowRight onClick={handleRightArrowRightBook}>
@@ -117,10 +125,12 @@ function Home() {
             marginLeft: scrollXBook, 
             width: book.length * 250}}>
           {book.map(b => (
-            <CardBook title={b.title} description={b.description} category={b.category} />
+            <Link to={`/book/${b._id}`} >
+              <CardBook title={b.title} description={b.description} category={b.category} />
+            </Link>
           ))}
           </S.RowList>
-        </S.Content> */}
+        </S.Content>
         <Footer />
         {author.length <= 0 && (
           <S.Loading>

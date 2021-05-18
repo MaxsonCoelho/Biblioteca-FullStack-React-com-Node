@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 
 export const Container = styled.div`
-    width: 180px;
-    height: 330px;
+    width: 200px;
+    height: 360px;
     flex-direction: column;
     box-shadow: 12px -10px 55px -21px rgba(0,0,0,0.75);
     display: flex;
@@ -14,6 +14,11 @@ export const Container = styled.div`
     cursor: pointer;
     transition: all 0.3s ease;
     display: inline-block;
+
+    h3{
+        font-size: 17px;
+        text-align: center;
+    }
 
     img{
         width: 100%;

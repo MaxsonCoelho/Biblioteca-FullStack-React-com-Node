@@ -4,29 +4,80 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CategoryIconsAuthor from '../../utils/categorysAuthor';
 import api from '../../services/api';
+import { Redirect } from 'react-router-dom';
 
 
-function Books() {
+function Books({match}) {
 
+    const [redirect, setRedirect] = useState(false);
     const [title, setTitle] = useState();
-    const [description, setDescription] =useState();
-    const [category, setCategory] =useState();
+    const [description, setDescription] = useState();
+    const [category, setCategory] = useState();
+
+
+    function attributeValidation(){
+        if(!title)
+            return alert("Por favor informe um título")
+        else if(!description)
+            return alert("Por favor informe uma descrição detalhada")
+        else if(!category)
+            return alert("Por favor selecione uma categoria")
+    }
 
 
     async function save() {
-        await api.post(`/books`, {
-            title,
-            description,
-            category
-        }).then(() => {
-            alert('Livro adicionado com sucesso!')
-        })
-        .catch(e => alert(`Falta escolher ou preencher alguma opção${e}`))
+        attributeValidation()
+        if(match.params.id){
+            await api.put(`/books/${match.params.id}`, {
+                title,
+                description,
+                category
+            }).then(() => {
+                setRedirect(true)
+                alert('Livro atualizado com sucesso!')
+            })
+            .catch(e => console.log(e))
+
+        }else {
+            await api.post(`/books`, {
+                title,
+                description,
+                category
+            }).then(() => {
+                setRedirect(true)
+                alert('Livro adicionado com sucesso!')
+            })
+            .catch(e => console.log(e))
+        }
     }
+
+
+    async function remove() {
+        const res = window.confirm('Deseja realmente remover este livro?')
+        if(res === true){
+            await api.delete(`/books/${match.params.id}`)
+            .then(() => setRedirect(true));
+        }
+    }
+
+
+    useEffect(() => {
+        async function loadBooksDetails(){
+            await api.get(`/books/${match.params.id}`)
+            .then(response => {
+                setTitle(response.data.title)
+                setDescription(response.data.description)
+                setCategory(response.data.category)
+            })
+            .catch(e => console.log(e))
+        }
+        loadBooksDetails();
+    },[])
 
 
   return (
     <S.Container>
+        { redirect && <Redirect to="/" /> }
         <Header />
 
         <S.Form>
@@ -52,7 +103,7 @@ function Books() {
                 onChange={e => setDescription(e.target.value)} value={description}/>
             </S.Input>
             <S.Delete>
-                <button type="button" alt="deletar autor">Excluir Livro</button>
+                <button type="button" onClick={remove} alt="deletar autor">Excluir Livro</button>
             </S.Delete>
             <S.Save>
                 <button type="button" onClick={save} >Salvar</button>

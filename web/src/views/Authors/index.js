@@ -12,9 +12,9 @@ function Authors({match}) {
 
     const [redirect, setRedirect] = useState(false);
     const [name, setName] = useState();
-    const [date, setDate] =useState();
+    const [date, setDate] = useState();
     const [email, setEmail] = useState();
-    const [category, setCategory] =useState();
+    const [category, setCategory] = useState();
 
 
     function attributeValidation(){

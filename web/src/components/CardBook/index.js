@@ -7,11 +7,11 @@ function CardBook({title, description, category}) {
     return (
       <S.Container>
         <S.TopCard>
-          <h4>{title}</h4>
+          <h3>{title}</h3>
           <img src={photo} alt="Imagem do autor" />
         </S.TopCard>
         <S.BottomCard>
-          <span>Descrição: {description}</span>
+          <span>{description}</span>
           <span>Categoria: {category}</span>
         </S.BottomCard>
       </S.Container>
