@@ -1,26 +1,28 @@
 # biblioteca
- Backend (Node.js) and frontend (React.js). Creation of a Library where authors and their books will be registered.
+
+Back-end (Node.js) with (Mongodb) and front-end (React.js). Creation of a Library where the authors and their books will be registered.
  
- Project FullStack 
+ FullStack Project
  
-Backend
-Registration of Authors and books.
-Deletion.
+Back-end
+Registration of authors and books.
+Elimination.
 Exclusion.
-Search.
-Documentation in insomnia rest api test
-In api with Node and Express
+To search for.
+Resting API test documentation for insomnia
+In the API with Node and Express
 
 
-Frontend Web
-Screens of Authors, books and home with header and footer.
-Custom slide show.
-Registration of Authors and books.
-Deletion.
+Web Frontend
+Screens of authors, books and home with header and footer.
+Personalized slide show.
+Registration of authors and books.
+Elimination.
 Exclusion.
-Search.
+To search for.
 
-start projects with, npm install, both on the backend and on the frontend.
+Start projects with npm install, both on the backend and on the frontend.
+Install the Mongodb database.
 
-NOTE: I couldn't get more time to upload images on the backend, 
-i also didn’t get more time to dockerize the project.
+NOTE: I was no longer able to upload images to the backend,
+I also don't have any more time to fit the project.
