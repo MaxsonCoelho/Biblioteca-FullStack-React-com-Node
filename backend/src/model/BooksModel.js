@@ -7,7 +7,7 @@ const BooksSchema = new Schema({
     description: {type: String, require: true},
     category: {type: Number, required: true},
     image: {type: Object, require: false},
-    author: [{ type: Schema.Types.ObjectId, ref: 'Author', require: true }]
+    author: { type: Schema.Types.ObjectId, ref: 'Author', require: true }
 });
 
 

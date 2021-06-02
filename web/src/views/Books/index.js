@@ -88,6 +88,8 @@ function Books({match}) {
                         <button type="button" onClick={() => setCategory(index)}>
                             <img src={icon} alt="Categoria do livro" 
                             className={category && category !== index && 'inative'} />
+                            {index === 1 && 'Romance'} {index === 2 && 'Ação'} {index === 3 && 'Aventura'}
+                            {index === 4 && 'Autoajuda'} {index === 5 && 'Gospel'} {index === 6 && 'Motivação'}
                         </button>
                     ))
                 }

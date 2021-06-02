@@ -52,6 +52,20 @@ class BooksController {
         .catch(e => res.status(500).json(e));
     }
 
+    async showBooksAuthor(req, res) {
+        
+        await BooksModel.find({
+            "author": req.params.author,
+        })
+        .then(response => {
+            if(response)
+            return res.status(200).json(response);
+            else
+            return res.status(404).json({ error: 'Título não encontrado' })
+        })
+        .catch(e => res.status(500).json(e));
+    }
+
     async delete(req, res) {
         
         await BooksModel.deleteOne({'_id': req.params.id})
